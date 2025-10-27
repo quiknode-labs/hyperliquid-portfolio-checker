@@ -1,26 +1,65 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ===== Base Reset ===== */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;height:100%}
+body{
+  background: radial-gradient(1200px 600px at 20% -10%, #7c8cf9 0%, transparent 60%),
+              linear-gradient(135deg, #5c6ddc 0%, #6f3fb2 100%);
+  background-attachment: fixed;
+  min-height:100vh;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  color:#111827;
+  -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ===== Layout helpers ===== */
+.app-container{width:100%;max-width:80rem;margin-inline:auto;padding-inline:1rem}
+@media (min-width:640px){.app-container{padding-inline:1.5rem}}
+@media (min-width:1024px){.app-container{padding-inline:2rem}}
+
+.section-grid{display:grid;gap:1rem}
+@media (min-width:640px){.section-grid{gap:1.5rem}}
+@media (min-width:1024px){.section-grid{gap:1.5rem}}
+
+/* ===== Glass Surface ===== */
+.glass{
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border:1px solid rgba(255,255,255,0.6);
+  box-shadow: 0 10px 30px rgba(17,24,39,.10), inset 0 1px 0 rgba(255,255,255,.5);
+  border-radius: 1rem; /* cards stay rounded */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Card hover */
+.card-hover{transition:transform .2s ease, box-shadow .2s ease}
+.card-hover:hover{transform:translateY(-2px); box-shadow:0 16px 30px rgba(0,0,0,.12)}
+
+/* Animations */
+@keyframes fade-in{from{opacity:0}to{opacity:1}}
+@keyframes slide-up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+/* Gradient text */
+.gradient-text{
+  background: linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
+/* Controls & focus */
+input,button,select,textarea{font:inherit}
+button{border:0;cursor:pointer}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid #3b82f6;outline-offset:2px}
+
+/* Tables */
+table{border-collapse:collapse;width:100%}
+thead th{white-space:nowrap}
+.table-head{background:#f9fafb}
+.table-row{transition:background-color .15s ease}
+.table-row:hover{background:#f3f4f6}
+
+/* Scrollbar */
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:rgba(255,255,255,.25);border-radius:999px}
+::-webkit-scrollbar-thumb{background:rgba(17,24,39,.25);border-radius:999px}
+::-webkit-scrollbar-thumb:hover{background:rgba(17,24,39,.4)}
